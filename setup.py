@@ -29,5 +29,5 @@ setup(
     test_suite = 'nose.collector',
     tests_require=tests_require, 
     install_requires=install_requires,
-    classifiers=categories,
+    classifiers=classifiers,
 )
