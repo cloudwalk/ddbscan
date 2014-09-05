@@ -16,6 +16,8 @@ Discrete DBSCAN
     :alt: Supported Python versions
 
 
+|
+
 This is a version of `DBSCAN`_ clustering algorithm optimized for discrete, 
 bounded data, reason why we call it Discrete DBSCAN (DDBSCAN). The base for 
 the current implementation is from `this source`_. The algorithm code is in 
