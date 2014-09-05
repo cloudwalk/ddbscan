@@ -12,6 +12,7 @@ setup(
     version=version,
     author='Allan Inocencio de Souza Costa',
     author_email='allan@cloudwalk.io',
+    url='https://github.com/cloudwalkio/ddbscan',
     packages=['ddbscan'],
     license='LICENSE',
     description='Discrete DBSCAN algorithm optimized for discrete and bounded data.',
