@@ -75,6 +75,6 @@ License
     SOFTWARE.
 
 
-[DBSCAN]:http://en.wikipedia.org/wiki/DBSCAN
-[1]:http://cjauvin.blogspot.com.br/2014/06/dbscan-blues.html
-[cloudwalk/dbscan.py]:ddbscan/ddbscan.py
+.. _DBSCAN: http://en.wikipedia.org/wiki/DBSCAN
+.. _1: http://cjauvin.blogspot.com.br/2014/06/dbscan-blues.html
+.. _ddbscan/dbscan.py: ddbscan/ddbscan.py
