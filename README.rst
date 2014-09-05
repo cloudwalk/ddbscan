@@ -7,7 +7,7 @@ Discrete DBSCAN
 .. image:: https://coveralls.io/repos/cloudwalkio/ddbscan/badge.png?branch=master 
         :target: https://coveralls.io/r/cloudwalkio/ddbscan?branch=master
 
-.. image:: https://badge.fury.io/py/ddbscan.svg
+.. image:: http://img.shields.io/pypi/v/ddbscan.svg
     :target: https://pypi.python.org/pypi/ddbscan/
     :alt: Latest Version
 
@@ -15,6 +15,13 @@ Discrete DBSCAN
     :target: https://pypi.python.org/pypi/ddbscan/
     :alt: Supported Python versions
 
+.. image:: https://img.shields.io/pypi/dm/ddbscan.svg
+    :target: https://pypi.python.org/pypi/ddbscan/
+    :alt: Downloads on PyPI
+
+.. image:: https://img.shields.io/pypi/l/ddbscan.svg
+    :target: https://pypi.python.org/pypi/ddbscan/
+    :alt: License
 
 |
 
