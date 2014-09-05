@@ -28,12 +28,24 @@ inserted, updating the point data for its neighbours.
 Usage
 -----
 
-TODO
+To just install the package the easist way is to use pip:
 
-Running the tests
------------------
+.. code-block:: console
 
-TODO
+    $ pip install ddbscan
+
+Another option is to clone this repo and run
+
+.. code-block:: console
+
+    $ python setup.py install
+
+To run the tests:
+
+.. code-block:: console
+
+    $ python setup.py test
+
 
 License
 -------
