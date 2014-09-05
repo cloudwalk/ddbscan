@@ -1,21 +1,51 @@
 Discrete DBSCAN
 ===============
 
-This is a version of `DBSCAN`_ clustering algorithm optimized for discrete, bounded data, reason why we call it Discrete DBSCAN (DDBSCAN). The base for the current implementation is from `this source`_. The algorithm code is in file ``ddbscan/ddbscan.py`` and can easily be read. The main algorithm itself is in method ``compute()``, and can be understood following the links above or reading papers describing it.
+.. image:: https: https://travis-ci.org/cloudwalkio/ddbscan.svg?branch=master
+        :target: https://travis-ci.org/cloudwalkio/ddbscan
 
-Another feature of this implementation is that it is designed towards online learning. As a result, when we add points to our DDBSCAN object, we must pass one point each time to method ``add_point``. See :ref:`usage_section` below.
+.. image:: https://coveralls.io/repos/cloudwalkio/ddbscan/badge.png?branch=master 
+        :target: https://coveralls.io/r/cloudwalkio/ddbscan?branch=master
+
+.. image:: https://pypip.in/version/ddbscan/badge.svg
+    :target: https://pypi.python.org/pypi/ddbscan/
+    :alt: Latest Version
+
+.. image:: https://pypip.in/py_versions/ddbscan/badge.svg
+    :target: https://pypi.python.org/pypi/ddbscan/
+    :alt: Supported Python versions
+
+.. image:: https://pypip.in/license/ddbscan/badge.svg
+    :target: https://pypi.python.org/pypi/ddbscan/
+    :alt: License
+
+
+This is a version of `DBSCAN`_ clustering algorithm optimized for discrete, 
+bounded data, reason why we call it Discrete DBSCAN (DDBSCAN). The base for 
+the current implementation is from `this source`_. The algorithm code is in 
+file ``ddbscan/ddbscan.py`` and can easily be read. The main algorithm itself 
+is in method ``compute()``, and can be understood following the links above 
+or reading papers describing it.
+
+Another feature of this implementation is that it is designed towards online 
+learning. As a result, when we add points to our DDBSCAN object, we must pass 
+one point each time to method ``add_point``. See :ref:`usage_section` below.
 
 Optimization for discrete and bounded data
 ------------------------------------------
 
-Our main optimization to the vanilla algorithm described in the links above is based on the fact that for discrete and bounded data, we expect
-to see many times the same point occurring, so we can keep track of how many times the point ocurred and optimize our algorithm to use that
-information.
+Our main optimization to the vanilla algorithm described in the links above is 
+based on the fact that for discrete and bounded data, we expect to see many 
+times the same point occurring, so we can keep track of how many times the 
+point ocurred and optimize our algorithm to use that information.
 
-To speed up insertions of new points and computation of clusters, each DDBSCAN object keeps, for each point, the index of its neighbours and
-the neighbourhood size (the sum of the counts of the neighbours points). So, when we insert a new point, we see if it is an already existing pair
-and just increment its counter and the neighbourhood size of its neighbours. We recompute a KDTree with the points in case a new pair is
-inserted, updating the point data for its neighbours.
+To speed up insertions of new points and computation of clusters, each DDBSCAN 
+object keeps, for each point, the index of its neighbours and the neighbourhood 
+size (the sum of the counts of the neighbours points). So, when we insert a new 
+point, we see if it is an already existing pair and just increment its counter 
+and the neighbourhood size of its neighbours. We recompute a KDTree with the 
+points in case a new pair is inserted, updating the point data for its 
+neighbours.
 
 Parameters
 ----------
@@ -25,7 +55,14 @@ A DBSCAN model has two parameters:
 -  ``min_pts``: minimum amount of neighbours of a point to create a cluster.
 -  ``eps`` : radius to look for neighbours.
 
-By tunning the two parameters we are, in fact, setting the anomaly (outlier) detection sensitiveness. A greater value for ``min_pts`` implies that to recognize a new pattern as a cluster, instead of an anomaly, we must see a larger amount of points with that pattern. A greater value for ``eps`` implies bigger clusters can form easier, so that points in less dense areas can be recognized as clusters members given this large ``eps``. Given the importance of tunning this parameters, we have a method to set them, called ``set_params()``, which updates the internal state of the model accordingly.
+By tunning the two parameters we are, in fact, setting the anomaly (outlier) 
+detection sensitiveness. A greater value for ``min_pts`` implies that to 
+recognize a new pattern as a cluster, instead of an anomaly, we must see a 
+larger amount of points with that pattern. A greater value for ``eps`` implies 
+bigger clusters can form easier, so that points in less dense areas can be 
+recognized as clusters members given this large ``eps``. Given the importance 
+of tunning this parameters, we have a method to set them, called 
+``set_params()``, which updates the internal state of the model accordingly.
 
 Install
 -------
