@@ -1,6 +1,12 @@
 from  scipy.spatial import cKDTree
 import numpy as np
 
+# In Python 3.* xrange become default range
+try:
+    xrange
+except NameError:
+    xrange = range
+
 class PointData:
     """ 
     Struct for a data point. 
