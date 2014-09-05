@@ -1,43 +1,31 @@
 language: python
-
 python:
-  - '2.6'
-  - '2.7'
-  - '3.2'
-  - '3.3'
-
-
-# Setup anaconda
+- '2.6'
+- '2.7'
+- '3.2'
+- '3.3'
 before_install:
-  - wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
-  - chmod +x miniconda.sh
-  - ./miniconda.sh -b
-  - export PATH=/home/travis/miniconda/bin:$PATH
-  - conda update --yes conda
-  # The next couple lines fix a crash with multiprocessing on Travis and are not specific to using Miniconda
-  - sudo rm -rf /dev/shm
-  - sudo ln -s /run/shm /dev/shm
-
-# Install packages
-install: 
-  - conda install --yes python=$TRAVIS_PYTHON_VERSION atlas numpy scipy matplotlib nose dateutil pandas statsmodels
-  # Coverage packages are on my binstar channel
-  - conda install --yes -c dan_blanchard python-coveralls nose-cov
-  - pip install coveralls
-  - python setup.py install
-
-# Run test
+- wget http://repo.continuum.io/miniconda/Miniconda-latest-Linux-x86_64.sh -O miniconda.sh
+- chmod +x miniconda.sh
+- "./miniconda.sh -b"
+- export PATH=/home/travis/miniconda/bin:$PATH
+- conda update --yes conda
+- sudo rm -rf /dev/shm
+- sudo ln -s /run/shm /dev/shm
+install:
+- conda install --yes python=$TRAVIS_PYTHON_VERSION atlas numpy scipy matplotlib nose
+  dateutil pandas statsmodels
+- conda install --yes -c dan_blanchard python-coveralls nose-cov
+- pip install coveralls
+- python setup.py install
 script: nosetests --with-coverage --cover-package=ddbscan --logging-level=INFO
-
-# Calculate coverage
 after_success:
-  - coveralls --config_file .coveragerc
-
+- coveralls --config_file .coveragerc
 deploy:
   provider: pypi
   user: allanino
   password:
-    secure: f6A4pg0MWM11U4i+MViOMNe/YM9LT6v/jAFs6JRQ7jp+2eVjuzFlfByVn0sLdALExHi4sno66j7aLTGJcSlwlRZUt/Wss1C+4Rt1D+KrzriFdH8WANKzTF63fh8cZDYMdEerzCkcPwzcBB5tmdpMXq44LIaw/d4a7hF2L5bNqlc=
+    secure: ME8sSq4zD7qrshqVyIZv86IOqgKaXOVtosQ+76aRwxrGUCLhTrapeYji49CVKlug3b33MiIxiZeHwwZsh7HqdS1FzneCPxTqSijh48CssUWJJ3OCVRutpQONwvD7n1ZzzhsWo8gFN/vFZOSLl7+bCpdm1OXzxM2sTnVR2NM4tZY=
   on:
     all_branches: true
     tags: true
