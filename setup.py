@@ -8,7 +8,7 @@ install_requires = ["scipy >= 0.13.3",
 
 tests_require = ["nose"]
 
-categories=[
+classifiers=[
     'Intended Audience :: Developers',
     'License :: OSI Approved :: MIT License',
     'Programming Language :: Python :: 2.7',
@@ -29,5 +29,5 @@ setup(
     test_suite = 'nose.collector',
     tests_require=tests_require, 
     install_requires=install_requires,
-    categories=categories,
+    classifiers=categories,
 )
