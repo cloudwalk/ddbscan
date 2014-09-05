@@ -7,17 +7,13 @@ Discrete DBSCAN
 .. image:: https://coveralls.io/repos/cloudwalkio/ddbscan/badge.png?branch=master 
         :target: https://coveralls.io/r/cloudwalkio/ddbscan?branch=master
 
-.. image:: https://pypip.in/version/ddbscan/badge.svg
+.. image:: https://badge.fury.io/py/ddbscan.svg
     :target: https://pypi.python.org/pypi/ddbscan/
     :alt: Latest Version
 
 .. image:: https://pypip.in/py_versions/ddbscan/badge.svg
     :target: https://pypi.python.org/pypi/ddbscan/
     :alt: Supported Python versions
-
-.. image:: https://pypip.in/license/ddbscan/badge.svg
-    :target: https://pypi.python.org/pypi/ddbscan/
-    :alt: License
 
 
 This is a version of `DBSCAN`_ clustering algorithm optimized for discrete, 
