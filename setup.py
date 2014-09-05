@@ -14,7 +14,7 @@ setup(
     author_email='allan@cloudwalk.io',
     url='https://github.com/cloudwalkio/ddbscan',
     packages=['ddbscan'],
-    license='LICENSE',
+    license='MIT',
     description='Discrete DBSCAN algorithm optimized for discrete and bounded data.',
     long_description=open('README.rst').read(),
     test_suite = 'nose.collector',
