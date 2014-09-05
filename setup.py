@@ -1,11 +1,20 @@
 from setuptools import setup
 import multiprocessing
 
-version = '0.2.0'
+version = '0.2.1'
 
 install_requires = ["scipy >= 0.13.3",
                     "numpy >=1.8.1"]
+
 tests_require = ["nose"]
+
+categories=[
+    'Intended Audience :: Developers',
+    'License :: OSI Approved :: MIT License',
+    'Programming Language :: Python :: 2.7',
+    'Programming Language :: Python :: 3.3',
+    'Topic :: Scientific/Engineering :: Artificial Intelligence',
+]
 
 setup(
     name='ddbscan',
@@ -20,4 +29,5 @@ setup(
     test_suite = 'nose.collector',
     tests_require=tests_require, 
     install_requires=install_requires,
+    categories=categories,
 )
