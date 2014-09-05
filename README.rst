@@ -1,7 +1,7 @@
 Discrete DBSCAN
 ===============
 
-This is a version of `DBSCAN`_ clustering algorithm optimized for discrete, bounded data, reason why we call it Discrete DBSCAN (DDBSCAN). The base for the current implementation is from `this source`_. The algorithm code is in file `ddbscan/ddbscan.py`_ and can easily be read. The main algorithm itself is in method ``compute()``, and can be understood following the links above or reading papers describing it.
+This is a version of `DBSCAN`_ clustering algorithm optimized for discrete, bounded data, reason why we call it Discrete DBSCAN (DDBSCAN). The base for the current implementation is from `this source`_. The algorithm code is in file `ddbscan`_ and can easily be read. The main algorithm itself is in method ``compute()``, and can be understood following the links above or reading papers describing it.
 
 Parameters
 ----------
@@ -76,5 +76,5 @@ License
 
 
 .. _DBSCAN: http://en.wikipedia.org/wiki/DBSCAN
-.. _this soure: http://cjauvin.blogspot.com.br/2014/06/dbscan-blues.html
-.. _ddbscan/dbscan.py: ddbscan/ddbscan.py
+.. _this source: http://cjauvin.blogspot.com.br/2014/06/dbscan-blues.html
+.. _dbscan: ddbscan/ddbscan.py
