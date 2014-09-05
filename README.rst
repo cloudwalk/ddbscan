@@ -1,7 +1,7 @@
 Discrete DBSCAN
 ===============
 
-.. image:: https: https://travis-ci.org/cloudwalkio/ddbscan.svg?branch=master
+.. image:: https://travis-ci.org/cloudwalkio/ddbscan.svg?branch=master
         :target: https://travis-ci.org/cloudwalkio/ddbscan
 
 .. image:: https://coveralls.io/repos/cloudwalkio/ddbscan/badge.png?branch=master 
