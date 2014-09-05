@@ -29,7 +29,7 @@ or reading papers describing it.
 
 Another feature of this implementation is that it is designed towards online 
 learning. As a result, when we add points to our DDBSCAN object, we must pass 
-one point each time to method ``add_point``. See :ref:`usage_section` below.
+one point each time to method ``add_point``. See usage below.
 
 Optimization for discrete and bounded data
 ------------------------------------------
@@ -86,7 +86,6 @@ To run the tests:
     $ python setup.py test
 
 
-.. _usage_section:
 Usage
 -----
 
