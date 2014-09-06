@@ -4,7 +4,7 @@ Discrete DBSCAN
 .. image:: https://travis-ci.org/cloudwalkio/ddbscan.svg?branch=master
         :target: https://travis-ci.org/cloudwalkio/ddbscan
 
-.. image:: https://coveralls.io/repos/cloudwalkio/ddbscan/badge.png?branch=master 
+.. image:: https://img.shields.io/coveralls/cloudwalkio/ddbscan/master.svg 
         :target: https://coveralls.io/r/cloudwalkio/ddbscan?branch=master
 
 .. image:: https://scrutinizer-ci.com/g/cloudwalkio/ddbscan/badges/quality-score.png?b=master
