@@ -1,4 +1,4 @@
-from nose.tools import assert_equals
+from nose.tools import assert_equals, raises
 
 import ddbscan
 
@@ -115,6 +115,61 @@ def test_add_existing_point():
     assert_equals(scan.points_data[0].neighbourhood, [0])
     assert_equals(scan.points_data[0].count, 5 + 8)
     assert_equals(scan.points_data[0].size_neighbourhood, 5 + 8)
+
+def test_add_compute_increment():
+    scan = ddbscan.DDBSCAN(5, 10)
+
+    # Add one point to ddbscan
+    scan.add_point([2, 3], 5, "First point.", compute_increment=True)
+
+    # Add same point computing increment
+    scan.add_point([2, 3], 8, "First point incremented.", compute_increment=True)
+
+    # Test first point data
+    assert_equals(scan.points[0], [2,3])
+    assert_equals(scan.points_data[0].desc, "First point incremented.")
+    assert_equals(scan.points_data[0].neighbourhood, [0])
+    assert_equals(scan.points_data[0].count, 8)
+    assert_equals(scan.points_data[0].size_neighbourhood, 8)
+
+    # Add second point
+    scan.add_point([3, 4], 9, "Second point.", compute_increment=True)
+
+    # Test first point data
+    assert_equals(scan.points[0], [2,3])
+    assert_equals(scan.points_data[0].desc, "First point incremented.")
+    assert_equals(scan.points_data[0].neighbourhood, [0, 1])
+    assert_equals(scan.points_data[0].count, 8)
+    assert_equals(scan.points_data[0].size_neighbourhood, 17)
+
+    # Increment second point
+    scan.add_point([3, 4], 11, "Second point incremented.", compute_increment=True)
+
+    # Test first point data
+    assert_equals(scan.points[0], [2,3])
+    assert_equals(scan.points_data[0].desc, "First point incremented.")
+    assert_equals(scan.points_data[0].neighbourhood, [0, 1])
+    assert_equals(scan.points_data[0].count, 8)
+    assert_equals(scan.points_data[0].size_neighbourhood, 19)
+
+    # Test second point data
+    assert_equals(scan.points[1], [3,4])
+    assert_equals(scan.points_data[1].desc, "Second point incremented.")
+    assert_equals(scan.points_data[1].neighbourhood, [0, 1])
+    assert_equals(scan.points_data[1].count, 11)
+    assert_equals(scan.points_data[1].size_neighbourhood, 19)
+
+@raises(ValueError)
+def test_add_compute_increment_exception():
+    scan = ddbscan.DDBSCAN(5, 10)
+
+    # Add one point to ddbscan
+    scan.add_point([2, 3], 5, "First point.", compute_increment=True)
+
+    # Try to increment passing a new count less than the actual count
+    # This should raise a ValueError
+    scan.add_point([2, 3], 4, "First point incremented.", compute_increment=True)
+
 
 def test_set_params_simple():
     # Test parameters setting
