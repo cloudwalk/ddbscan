@@ -55,11 +55,10 @@ class DDBSCAN:
         """
         self.last_index = self.points.index(point) if point in self.points else -1
         if self.last_index != -1: # If point already seem
-            self.points_data[self.last_index].count = self.points_data[self.last_index].count + count
+            self.points_data[self.last_index].count += count
             self.points_data[self.last_index].desc = desc
             for neighbour_index in self.points_data[self.last_index].neighbourhood:
-                self.points_data[neighbour_index].size_neighbourhood = \
-                    self.points_data[neighbour_index].size_neighbourhood + count
+                self.points_data[neighbour_index].size_neighbourhood += count
         else:
             # Add point to list and update last_index
             self.last_index = len(self.points)
@@ -77,10 +76,9 @@ class DDBSCAN:
             # Calculate size of neighbourhood and add this to their neighbourhood
             for neighbour_index in self.points_data[self.last_index].neighbourhood:
                 if neighbour_index != self.last_index: # Update others in neighbourhood
-                    self.points_data[self.last_index].size_neighbourhood = \
-                        self.points_data[self.last_index].size_neighbourhood + self.points_data[neighbour_index].count
+                    self.points_data[self.last_index].size_neighbourhood += self.points_data[neighbour_index].count
                     self.points_data[neighbour_index].neighbourhood.append(self.last_index)
-                    self.points_data[neighbour_index].size_neighbourhood = self.points_data[neighbour_index].size_neighbourhood + count
+                    self.points_data[neighbour_index].size_neighbourhood += count
     
     def set_params(self, eps, min_pts):
         """ Set params and update structures. """
@@ -93,11 +91,10 @@ class DDBSCAN:
             self.points_data[i].neighbourhood = self.tree.query_ball_point(self.points[i], self.eps)
             self.points_data[i].size_neighbourhood = 0
         
-        # Update size -f neighbourhood
+        # Update neighbourhood size
         for i in xrange(len(self.points)):
             for neighbour_index in self.points_data[i].neighbourhood:
-                self.points_data[i].size_neighbourhood = \
-                        self.points_data[i].size_neighbourhood + self.points_data[neighbour_index].count
+                self.points_data[i].size_neighbourhood += self.points_data[neighbour_index].count
 
     def compute(self):
         """ Compute clusters. """
