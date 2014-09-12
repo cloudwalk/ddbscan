@@ -7,9 +7,9 @@ Discrete DBSCAN
 .. image:: https://img.shields.io/coveralls/cloudwalkio/ddbscan/master.svg 
         :target: https://coveralls.io/r/cloudwalkio/ddbscan?branch=master
 
-.. image:: https://scrutinizer-ci.com/g/cloudwalkio/ddbscan/badges/quality-score.png?b=master
-    :target: https://scrutinizer-ci.com/g/cloudwalkio/ddbscan/
-    :alt: Scrutinizer quality score
+.. image:: https://landscape.io/github/cloudwalkio/ddbscan/master/landscape.png
+    :target: https://landscape.io/github/cloudwalkio/ddbscan
+    :alt: Landscape quality score
 
 .. image:: https://img.shields.io/pypi/v/ddbscan.svg
     :target: https://pypi.python.org/pypi/ddbscan/
