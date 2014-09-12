@@ -1,5 +1,4 @@
 from  scipy.spatial import cKDTree
-import numpy as np
 
 # In Python 3.* xrange become default range
 try:
@@ -7,7 +6,7 @@ try:
 except NameError:
     xrange = range
 
-class PointData:
+class PointData(object):
     """ 
     Struct for a data point. 
     Fields: 
@@ -27,7 +26,7 @@ class PointData:
         self.size_neighbourhood = count # It contains itself
         self.desc = desc
         
-class DDBSCAN:
+class DDBSCAN(object):
     """ Class to create a DDBSCAN model using data discreteness to speed things up.
     
     Attributes:
