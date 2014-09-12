@@ -49,12 +49,18 @@ class DDBSCAN:
         self.last_index = 0 
         self.tree = None
         
-    def add_point(self, point, count, desc):
+    def add_point(self, point, count, desc, compute_increment=False):
         """ Add a new point (passed as a n-dimensional list [x, y, z, ...]) to model updating it's neighbours.
             It's description will be set to desc. 
         """
         self.last_index = self.points.index(point) if point in self.points else -1
         if self.last_index != -1: # If point already seem
+            # If it's to compute increment, it's just count - previous_count
+            if compute_increment:
+                count = count - self.points_data[self.last_index].count
+                if count < 0:
+                    raise ValueError('Error computing increment: negative value found.')
+
             self.points_data[self.last_index].count += count
             self.points_data[self.last_index].desc = desc
             for neighbour_index in self.points_data[self.last_index].neighbourhood:
