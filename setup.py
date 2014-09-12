@@ -1,7 +1,7 @@
 from setuptools import setup
 import multiprocessing
 
-version = '0.2.1'
+version = '0.2.2'
 
 install_requires = ["scipy >= 0.13.3",
                     "numpy >=1.8.1"]
