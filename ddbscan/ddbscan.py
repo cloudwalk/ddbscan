@@ -7,17 +7,17 @@ except NameError:
     xrange = range
 
 class PointData(object):
-    """ 
-    Struct for a data point. 
-    Fields: 
-    - count: number of points with that coordinates  
+    """
+    Struct for a data point.
+    Fields:
+    - count: number of points with that coordinates
     - cluster: label of cluster. -1 is noise.
     - core: True if it's core point, False it it's reachable (or noise)
     - size_neighbourhood: number of points in the neighbourhood
     - neighbourhood: list of indices of points within eps
     - desc: latest description
     """
-    
+
     def __init__(self, count, desc):
         self.count = count
         self.cluster = -1 #noise
@@ -25,10 +25,10 @@ class PointData(object):
         self.neighbourhood = []
         self.size_neighbourhood = count # It contains itself
         self.desc = desc
-        
+
 class DDBSCAN(object):
     """ Class to create a DDBSCAN model using data discreteness to speed things up.
-    
+
     Attributes:
         - eps: radius to look for neighbours
         - min_pts: minumum of neighbours to be core point
@@ -38,19 +38,19 @@ class DDBSCAN(object):
         - last_index: index of last data point
         - tree: kd-tree used to retrieve neighbourhood for points
     """
-    
+
     def __init__(self, eps, min_pts):
         self.eps = eps
         self.min_pts = min_pts
         self.points_data = []
         self.points = []
         self.clusters = []
-        self.last_index = 0 
+        self.last_index = 0
         self.tree = None
-        
+
     def add_point(self, point, count, desc, compute_increment=False):
         """ Add a new point (passed as a n-dimensional list [x, y, z, ...]) to model updating it's neighbours.
-            It's description will be set to desc. 
+            It's description will be set to desc.
         """
         self.last_index = self.points.index(point) if point in self.points else -1
         if self.last_index != -1: # If point already seem
@@ -68,34 +68,34 @@ class DDBSCAN(object):
             # Add point to list and update last_index
             self.last_index = len(self.points)
             self.points.append(point)
-            
+
             # Create PointData
             self.points_data.append(PointData(count, desc))
-            
+
             # Recreate tree
             self.tree = cKDTree(self.points)
-            
+
             # Update neighbourhood list
             self.points_data[self.last_index].neighbourhood = self.tree.query_ball_point(point, self.eps)
-            
+
             # Calculate size of neighbourhood and add this to their neighbourhood
             for neighbour_index in self.points_data[self.last_index].neighbourhood:
                 if neighbour_index != self.last_index: # Update others in neighbourhood
                     self.points_data[self.last_index].size_neighbourhood += self.points_data[neighbour_index].count
                     self.points_data[neighbour_index].neighbourhood.append(self.last_index)
                     self.points_data[neighbour_index].size_neighbourhood += count
-    
+
     def set_params(self, eps, min_pts):
         """ Set params and update structures. """
         self.eps = eps
         self.min_pts = min_pts
-        
+
         # Update data
         for i in xrange(len(self.points)):
             self.points_data[i].cluster = -1
             self.points_data[i].neighbourhood = self.tree.query_ball_point(self.points[i], self.eps)
             self.points_data[i].size_neighbourhood = 0
-        
+
         # Update neighbourhood size
         for i in xrange(len(self.points)):
             for neighbour_index in self.points_data[i].neighbourhood:
@@ -124,7 +124,7 @@ class DDBSCAN(object):
                         num_neighbours = self.points_data[j].size_neighbourhood
                         if num_neighbours >= self.min_pts:
                             to_merge_in_cluster |= set(self.points_data[j].neighbourhood)
-                    if not any([j in c for c in self.clusters]):
+                    if not any([j in c[0] | c[1] for c in self.clusters]):
                         self.points_data[j].cluster = num_cluster
                         num_neighbours = self.points_data[j].size_neighbourhood
                         if num_neighbours >= self.min_pts:
@@ -133,3 +133,4 @@ class DDBSCAN(object):
                         else:
                             self.points_data[j].core = False
                             self.clusters[-1][1].add(j) # reachable
+        print self.clusters
