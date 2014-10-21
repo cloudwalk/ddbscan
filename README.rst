@@ -4,7 +4,7 @@ Discrete DBSCAN
 .. image:: https://travis-ci.org/cloudwalkio/ddbscan.svg?branch=master
         :target: https://travis-ci.org/cloudwalkio/ddbscan
 
-.. image:: https://img.shields.io/coveralls/cloudwalkio/ddbscan/master.svg 
+.. image:: https://img.shields.io/coveralls/cloudwalkio/ddbscan/master.svg
         :target: https://coveralls.io/r/cloudwalkio/ddbscan?branch=master
 
 .. image:: https://landscape.io/github/cloudwalkio/ddbscan/master/landscape.png
@@ -29,31 +29,31 @@ Discrete DBSCAN
 
 |
 
-This is a version of `DBSCAN`_ clustering algorithm optimized for discrete, 
-bounded data, reason why we call it Discrete DBSCAN (DDBSCAN). The base for 
-the current implementation is from `this source`_. The algorithm code is in 
-file ``ddbscan/ddbscan.py`` and can easily be read. The main algorithm itself 
-is in method ``compute()``, and can be understood following the links above 
+This is a version of `DBSCAN`_ clustering algorithm optimized for discrete,
+bounded data, reason why we call it Discrete DBSCAN (DDBSCAN). The base for
+the current implementation is from `this source`_. The algorithm code is in
+file ``ddbscan/ddbscan.py`` and can easily be read. The main algorithm itself
+is in method ``compute()``, and can be understood following the links above
 or reading papers describing it.
 
-Another feature of this implementation is that it is designed towards online 
-learning. As a result, when we add points to our DDBSCAN object, we must pass 
+Another feature of this implementation is that it is designed towards online
+learning. As a result, when we add points to our DDBSCAN object, we must pass
 one point each time to method ``add_point``. See usage below.
 
 Optimization for discrete and bounded data
 ------------------------------------------
 
-Our main optimization to the vanilla algorithm described in the links above is 
-based on the fact that for discrete and bounded data, we expect to see many 
-times the same point occurring, so we can keep track of how many times the 
+Our main optimization to the vanilla algorithm described in the links above is
+based on the fact that for discrete and bounded data, we expect to see many
+times the same point occurring, so we can keep track of how many times the
 point ocurred and optimize our algorithm to use that information.
 
-To speed up insertions of new points and computation of clusters, each DDBSCAN 
-object keeps, for each point, the index of its neighbours and the neighbourhood 
-size (the sum of the counts of the neighbours points). So, when we insert a new 
-point, we see if it is an already existing pair and just increment its counter 
-and the neighbourhood size of its neighbours. We recompute a KDTree with the 
-points in case a new pair is inserted, updating the point data for its 
+To speed up insertions of new points and computation of clusters, each DDBSCAN
+object keeps, for each point, the index of its neighbours and the neighbourhood
+size (the sum of the counts of the neighbours points). So, when we insert a new
+point, we see if it is an already existing pair and just increment its counter
+and the neighbourhood size of its neighbours. We recompute a KDTree with the
+points in case a new pair is inserted, updating the point data for its
 neighbours.
 
 Parameters
@@ -64,13 +64,13 @@ A DBSCAN model has two parameters:
 -  ``min_pts``: minimum amount of neighbours of a point to create a cluster.
 -  ``eps`` : radius to look for neighbours.
 
-By tunning the two parameters we are, in fact, setting the anomaly (outlier) 
-detection sensitiveness. A greater value for ``min_pts`` implies that to 
-recognize a new pattern as a cluster, instead of an anomaly, we must see a 
-larger amount of points with that pattern. A greater value for ``eps`` implies 
-bigger clusters can form easier, so that points in less dense areas can be 
-recognized as clusters members given this large ``eps``. Given the importance 
-of tunning this parameters, we have a method to set them, called 
+By tunning the two parameters we are, in fact, setting the anomaly (outlier)
+detection sensitiveness. A greater value for ``min_pts`` implies that to
+recognize a new pattern as a cluster, instead of an anomaly, we must see a
+larger amount of points with that pattern. A greater value for ``eps`` implies
+bigger clusters can form easier, so that points in less dense areas can be
+recognized as clusters members given this large ``eps``. Given the importance
+of tunning this parameters, we have a method to set them, called
 ``set_params()``, which updates the internal state of the model accordingly.
 
 Install
@@ -104,8 +104,8 @@ A typical example would be as following:
 
     import ddbscan
 
-    # Create a DDBSCAN model with eps = 4 and min_pts = 5
-    scan = ddbscan.DDBSCAN(2, 5)    
+    # Create a DDBSCAN model with eps = 2 and min_pts = 5
+    scan = ddbscan.DDBSCAN(2, 5)
 
     # Add points to model
     data = [[1,  2], [2,  2], [1,  3], [2, 3], [3, 3], [8, 9],
