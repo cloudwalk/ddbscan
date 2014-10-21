@@ -1,7 +1,7 @@
 from setuptools import setup
 import multiprocessing
 
-version = '0.2.2'
+version = '0.2.3'
 
 install_requires = ["scipy >= 0.13.3",
                     "numpy >=1.8.1"]
@@ -27,7 +27,7 @@ setup(
     description='Discrete DBSCAN algorithm optimized for discrete and bounded data.',
     long_description=open('README.rst').read(),
     test_suite = 'nose.collector',
-    tests_require=tests_require, 
+    tests_require=tests_require,
     install_requires=install_requires,
     classifiers=classifiers,
 )
