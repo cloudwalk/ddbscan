@@ -133,4 +133,3 @@ class DDBSCAN(object):
                         else:
                             self.points_data[j].core = False
                             self.clusters[-1][1].add(j) # reachable
-        print self.clusters
