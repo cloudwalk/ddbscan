@@ -21,7 +21,6 @@ class PointData(object):
     def __init__(self, count, desc):
         self.count = count
         self.cluster = -1 #noise
-        self.core = False
         self.neighbourhood = []
         self.size_neighbourhood = count # It contains itself
         self.desc = desc
@@ -103,7 +102,7 @@ class DDBSCAN(object):
 
     def compute(self):
         """ Compute clusters. """
-        self.clusters = []
+        self.clusters = [] # Array of sets, each set being a cluster
         num_cluster = -1
         visited = set()
         for i in xrange(len(self.points)):
@@ -112,9 +111,10 @@ class DDBSCAN(object):
             visited.add(i)
             num_neighbours = self.points_data[i].size_neighbourhood
             if num_neighbours >= self.min_pts:
-                self.clusters.append(({i}, set())) # core
+                self.clusters.append({i}) # Append new set (cluster) to clusters
                 num_cluster = num_cluster + 1
                 self.points_data[i].cluster = num_cluster
+                # Will merge every neighbour of i in the new cluster
                 to_merge_in_cluster = set(self.points_data[i].neighbourhood)
                 while to_merge_in_cluster:
                     j = to_merge_in_cluster.pop()
@@ -122,14 +122,12 @@ class DDBSCAN(object):
                         visited.add(j)
                         self.points_data[j].cluster = num_cluster
                         num_neighbours = self.points_data[j].size_neighbourhood
+                        # If j has more than min_pts neighbours, it is a core
+                        # point and we must also merge its neighbours, so we
+                        # append its neighbours to our set of points to merge
                         if num_neighbours >= self.min_pts:
                             to_merge_in_cluster |= set(self.points_data[j].neighbourhood)
-                    if not any([j in c[0] | c[1] for c in self.clusters]):
+                    # Now we add the point j its corresponding cluster
+                    if not any([j in c for c in self.clusters]):
                         self.points_data[j].cluster = num_cluster
-                        num_neighbours = self.points_data[j].size_neighbourhood
-                        if num_neighbours >= self.min_pts:
-                            self.points_data[j].core = True
-                            self.clusters[-1][0].add(j) # core
-                        else:
-                            self.points_data[j].core = False
-                            self.clusters[-1][1].add(j) # reachable
+                        self.clusters[-1].add(j) # Add it to latest cluster
