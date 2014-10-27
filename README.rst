@@ -118,12 +118,11 @@ A typical example would be as following:
     scan.compute()
 
     print 'Clusters found and its members points index:'
-    core_number = 0
-    for core, reachable in scan.clusters:
-        print '=== Core %d ===' % core_number
-        print 'Core points index: %s' % list(core)
-        print 'Reachable points index: %s' % list(reachable)
-        core_number += 1
+    cluster_number = 0
+    for cluster in scan.clusters:
+        print '=== Cluster %d ===' % cluster_number
+        print 'Cluster points index: %s' % list(cluster)
+        cluster_number += 1
 
     print '\nCluster assigned to each point:'
     for i in xrange(len(scan.points)):
@@ -134,6 +133,7 @@ A typical example would be as following:
             print '\t <== Anomaly found!'
         else:
             print
+
 
 
 License
