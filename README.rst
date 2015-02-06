@@ -134,6 +134,31 @@ A typical example would be as following:
         else:
             print
 
+    # Print ASCII plot
+    print
+    print ' ===== Data plot ====='
+    print
+    print 'Legend => x: anomaly'
+
+    symbols = 'x#=~+-opwbcnkjhf@uyt()987654321' # Symbols used to plot points
+    cluster_number = 0
+    for cluster in scan.clusters:
+        print '          %s: cluster %d' % (symbols[cluster_number + 1], cluster_number)
+        cluster_number += 1
+    print
+
+    print '-----------------------'
+    for x in range(0,10):
+        print '|',
+        for y in range(0, 10):
+            if [x, y] in data:
+                index = data.index([x,y])
+                cluster = scan.points_data[index].cluster + 1
+                print symbols[cluster],
+            else:
+                print ' ',
+        print '|'
+    print '-----------------------'
 
 
 License
@@ -143,7 +168,7 @@ License
 
     The MIT License (MIT)
 
-    Copyright (c) 2014 CloudWalk, Inc.
+    Copyright (c) 2015 CloudWalk, Inc.
 
     Permission is hereby granted, free of charge, to any person obtaining a copy
     of this software and associated documentation files (the "Software"), to deal
