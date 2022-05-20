@@ -19,12 +19,3 @@ install:
 script: nosetests --with-coverage --cover-package=ddbscan --logging-level=INFO
 after_success:
 - coveralls --config_file .coveragerc
-deploy:
-  provider: pypi
-  user: allanino
-  password:
-    secure: ME8sSq4zD7qrshqVyIZv86IOqgKaXOVtosQ+76aRwxrGUCLhTrapeYji49CVKlug3b33MiIxiZeHwwZsh7HqdS1FzneCPxTqSijh48CssUWJJ3OCVRutpQONwvD7n1ZzzhsWo8gFN/vFZOSLl7+bCpdm1OXzxM2sTnVR2NM4tZY=
-  on:
-    all_branches: true
-    tags: true
-    repo: cloudwalkio/ddbscan
